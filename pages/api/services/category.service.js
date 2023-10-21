@@ -1,6 +1,6 @@
 const boom = require('@hapi/boom');
 
-const sequelize = require('./../libs/sequelize');
+const sequelize = require('../libs/sequelize');
 
 class CategoryService {
 
