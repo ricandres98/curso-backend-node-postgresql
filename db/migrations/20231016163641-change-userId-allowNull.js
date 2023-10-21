@@ -2,7 +2,8 @@
 const { DataTypes } = require('sequelize');
 
 
-const { CUSTOMER_TABLE} = require('./../models/customer.model');
+const { CUSTOMER_TABLE} = require('../models/customer.model');
+const { USER_TABLE } = require('../models/user.model');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -12,6 +13,12 @@ module.exports = {
       allowNull: true,
       type: DataTypes.INTEGER,
       unique: true,
+      references: {
+        model: USER_TABLE,
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL'
     });
   },
 
@@ -20,7 +27,13 @@ module.exports = {
       field: 'user_id',
       allowNull: false,
       type: DataTypes.INTEGER,
-      unique: false
+      unique: true,
+      references: {
+        model: USER_TABLE,
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL'
     });
   }
 };

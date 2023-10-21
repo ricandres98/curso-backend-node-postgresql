@@ -12,7 +12,7 @@ const URI =
 
 const sequelize = new Sequelize(URI, {
   dialect: 'postgres',
-  logging: true,
+  logging: !(config.env === 'production'),
 });
 
 setupModels(sequelize);
