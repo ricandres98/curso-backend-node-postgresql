@@ -1,11 +1,11 @@
 const express = require('express');
 
-const UserService = require('./../services/user.service');
+const UsersService = require('./../services/users.service');
 const validatorHandler = require('./../middlewares/validator.handler');
 const { updateUserSchema, createUserSchema, getUserSchema } = require('./../schemas/user.schema');
 
 const router = express.Router();
-const service = new UserService();
+const service = new UsersService();
 
 router.get('/', async (req, res, next) => {
   try {
@@ -34,8 +34,8 @@ router.post('/',
   async (req, res, next) => {
     try {
       const body = req.body;
-      const newCategory = await service.create(body);
-      res.status(201).json(newCategory);
+      const newUser = await service.create(body);
+      res.status(201).json(newUser);
     } catch (error) {
       next(error);
     }

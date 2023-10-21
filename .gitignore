@@ -2,6 +2,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,windows,linux,macos
 
+
+
 ### Linux ###
 *~
 
@@ -191,5 +193,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+mysql_data
+postgres_data
 
 # End of https://www.toptal.com/developers/gitignore/api/node,windows,linux,macos
