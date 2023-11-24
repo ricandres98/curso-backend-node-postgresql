@@ -1,13 +1,21 @@
 // const boom = require('@hapi/boom');
 const boom = require('@hapi/boom');
 const sequelize = require('../libs/sequelize');
+const bcrypt = require('bcrypt');
+
 
 class UsersService {
   constructor() {
   }
 
   async create(data) {
-    const newUser = await sequelize.models.User.create(data);
+    const hash = await bcrypt.hash(data.password, 10);
+    const newUser = await sequelize.models.User.create({
+      ...data,
+      password: hash
+    });
+
+    delete newUser.dataValues.password;
     return newUser;
   }
 
@@ -22,11 +30,24 @@ class UsersService {
     }
   }
 
+  async findByEmail(email) {
+    // try {
+      const rta = await sequelize.models.User.findOne({
+        where: { email: email }
+      });
+      return rta;
+    // } catch (err) {
+    //   console.error(err)
+    // }
+  }
+
   async findOne(id) {
     const user = await sequelize.models.User.findByPk(id);
     if(!user) {
       throw boom.notFound()
     }
+    delete user.dataValues.password;
+
     return user;
   }
 

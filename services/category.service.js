@@ -34,9 +34,13 @@ class CategoryService {
   }
 
   async delete(id) {
-    const category = await this.findOne(id);
-    await category.destroy()
-    return { id };
+    try {
+      const category = await this.findOne(id);
+      await category.destroy()
+      return { id };
+    } catch (error) {
+      throw error;
+    }
   }
 
 }
